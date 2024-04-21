@@ -122,8 +122,12 @@
     - 비동기로 구현한다.
 
 
-## ERD
+## ERD (수정 전)
 ![tabling+](https://github.com/SoieYoo/my-tabling/assets/50662434/5ada963d-8658-49d8-afd7-b5d38f9ff69d)
+
+## ERD (수정 후)
+![tabling+ (1)](https://github.com/SoieYoo/my-tabling/assets/50662434/a34e1d47-df7b-4b1a-ab31-58b6f8036ab8)
+
 
 ## Trouble Shooting
 https://www.rabbitmq.com
