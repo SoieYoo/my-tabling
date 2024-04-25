@@ -132,6 +132,9 @@
 ## ERD (수정 후)
 ![tabling+ (1)](https://github.com/SoieYoo/my-tabling/assets/50662434/a34e1d47-df7b-4b1a-ab31-58b6f8036ab8)
 
+## ERD (2차 수정) : 리뷰의 다중 사진 업로드를 위해 리뷰와 파일 테이블 관계 수정
+![tabling+ (2)](https://github.com/SoieYoo/my-tabling/assets/50662434/12a06f0c-875b-4d82-96ba-f54ff7dda24e)
+
 
 ## Trouble Shooting
 https://www.rabbitmq.com
