@@ -1,6 +1,7 @@
 package com.zerobase.mytabling.store.domain;
 
 import com.zerobase.mytabling.manager.domain.Manager;
+import com.zerobase.mytabling.store.type.ReservationStatus;
 import com.zerobase.mytabling.store.type.UserType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,6 +19,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
@@ -26,17 +28,20 @@ import org.springframework.data.annotation.CreatedDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Audited
 public class ReservationAudit {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String oldStatus;   // 예약의 이전 상태
-  private String newStatus;   // 예약의 새로운 상태
+  @Enumerated(EnumType.STRING)
+  private ReservationStatus oldStatus;   // 예약의 이전 상태
+  @Enumerated(EnumType.STRING)
+  private ReservationStatus newStatus;   // 예약의 새로운 상태
 
   private LocalDateTime changedAt;
-  private String changedById;
+  private String changedByUserId;
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)

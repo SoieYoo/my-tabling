@@ -4,6 +4,8 @@ import com.zerobase.mytabling.customer.type.EmailStatus;
 import com.zerobase.mytabling.store.domain.Reservation;
 import com.zerobase.mytabling.store.domain.Store;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -38,7 +40,9 @@ public class EmailLog {
   @JoinColumn(name = "reservation_id", nullable = false)
   private Reservation reservation;
 
+  @Enumerated(EnumType.STRING)
   private EmailStatus emailStatus;
+
   private String errorMessage;
   private LocalDateTime sendAt;
   private @CreatedDate LocalDateTime createdAt;

@@ -22,7 +22,7 @@ import org.springframework.data.annotation.CreatedDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class File {
+public class ReviewFile {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
