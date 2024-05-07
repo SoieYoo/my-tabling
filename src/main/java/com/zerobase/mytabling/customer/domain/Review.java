@@ -2,6 +2,7 @@ package com.zerobase.mytabling.customer.domain;
 
 import com.zerobase.mytabling.store.domain.Reservation;
 import com.zerobase.mytabling.store.domain.Store;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,7 +41,7 @@ public class Review {
   private Store store;
 
   @OneToOne
-  @JoinColumn(name = "reservation_id", nullable = false)
+  @JoinColumn(name = "reservation_id", nullable = false, unique = true)
   private Reservation reservation;
 
   @Column(nullable = false)

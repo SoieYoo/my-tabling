@@ -1,6 +1,5 @@
 package com.zerobase.mytabling.store.domain;
 
-import com.zerobase.mytabling.manager.domain.Manager;
 import com.zerobase.mytabling.store.type.ReservationStatus;
 import com.zerobase.mytabling.store.type.UserType;
 import jakarta.persistence.Column;
