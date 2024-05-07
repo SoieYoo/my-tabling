@@ -30,7 +30,7 @@ public class StoreDto {
     private LocalTime closeTime;
     @NotNull
     private int reservationTimeUnit;
-//    @NotBlank
+    //    @NotBlank
     private Long managerId;
     @NotBlank
     private String street;

@@ -19,11 +19,11 @@ public class StoreService {
   /**
    * 매장 등록
    */
-  public void registerStore(StoreDto.Request storeRequest) {
+  public Long registerStore(StoreDto.Request storeRequest) {
     try {
 
       // 매장 저장
-      storeRepository.save(Store.builder()
+      Store savedStore = storeRepository.save(Store.builder()
           .storeName(storeRequest.getStoreName())
           .storeTelNumber(storeRequest.getStoreTelNumber())
           .openTime(storeRequest.getOpenTime())
@@ -36,6 +36,7 @@ public class StoreService {
           .build());
 
       log.info("Store saved successfully");
+      return savedStore.getId();
 
     } catch (Exception e) {
       log.error("Failed to register store", e);
