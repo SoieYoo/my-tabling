@@ -21,21 +21,10 @@ public class StoreService {
    */
   public Long registerStore(StoreDto.Request storeRequest) {
     try {
-
       // 매장 저장
-      Store savedStore = storeRepository.save(Store.builder()
-          .storeName(storeRequest.getStoreName())
-          .storeTelNumber(storeRequest.getStoreTelNumber())
-          .openTime(storeRequest.getOpenTime())
-          .closeTime(storeRequest.getCloseTime())
-          .reservationTimeUnit(storeRequest.getReservationTimeUnit())
-//          .manager(managerRepository.findById(storeRequest.getManagerId())
-//              .orElseThrow(() -> new IllegalArgumentException(
-//                  "Manager with ID " + storeRequest.getManagerId() + " not found")))
-          .createdAt(LocalDateTime.now())
-          .build());
+      Store savedStore = storeRepository.save(Store.createStore(storeRequest));
 
-      log.info("Store saved successfully");
+      log.info("Store saved successfully : {}", savedStore.getId());
       return savedStore.getId();
 
     } catch (Exception e) {

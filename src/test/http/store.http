@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "storeName": "매장1",
-  "storeTelNumber": "010-1234-5678",
+  "storeTelNumber": "010-1234-567",
   "openTime": "09:00",
   "closeTime": "21:00",
   "reservationTimeUnit": 90,

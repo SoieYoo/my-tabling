@@ -23,16 +23,9 @@ public class StoreController {
    */
   @PostMapping("/store")
   public ResponseEntity<String> registerStore(@RequestBody @Valid StoreDto.Request storeRequest) {
-    try {
-
-      storeService.registerStore(storeRequest);
-
-      return ResponseEntity.status(HttpStatus.CREATED).body("Store registered successfully");
-    } catch (Exception e) {
-      log.error("Failed to register store", e);
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-          .body("Failed to register store: " + e.getMessage());
-    }
+    Long savedId = storeService.registerStore(storeRequest);
+    return ResponseEntity.status(HttpStatus.CREATED)
+        .body("Store registered successfully , id = " + savedId);
   }
 
 }

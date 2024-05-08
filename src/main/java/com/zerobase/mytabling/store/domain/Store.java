@@ -1,5 +1,6 @@
 package com.zerobase.mytabling.store.domain;
 
+import com.zerobase.mytabling.store.dto.StoreDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -45,5 +46,19 @@ public class Store {
   private @CreatedDate LocalDateTime createdAt;
   private @LastModifiedDate LocalDateTime updatedAt;
 
+  // Store 인스턴스를 생성하는 static 메서드
+  public static Store createStore(StoreDto.Request storeRequest) {
+    return Store.builder()
+        .storeName(storeRequest.getStoreName())
+        .storeTelNumber(storeRequest.getStoreTelNumber())
+        .openTime(storeRequest.getOpenTime())
+        .closeTime(storeRequest.getCloseTime())
+        .reservationTimeUnit(storeRequest.getReservationTimeUnit())
+        .street(storeRequest.getStreet())
+        .city(storeRequest.getCity())
+        .postalCode(storeRequest.getPostalCode())
+        .createdAt(LocalDateTime.now())
+        .build();
+  }
 }
 
