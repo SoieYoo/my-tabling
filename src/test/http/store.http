@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "storeName": "매장1",
-  "storeTelNumber": "010-1234-567",
+  "storeTelNumber": "010-1234-5678",
   "openTime": "09:00",
   "closeTime": "21:00",
   "reservationTimeUnit": 90,
@@ -13,3 +13,7 @@ Content-Type: application/json
   "city": "서울",
   "postalCode": "12345"
 }
+
+### 매장 조회
+GET http://localhost:8080/stores/desc
+Accept: application/json
