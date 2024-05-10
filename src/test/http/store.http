@@ -1,0 +1,15 @@
+### 매장 등록
+POST http://localhost:8080/store
+Content-Type: application/json
+
+{
+  "storeName": "매장1",
+  "storeTelNumber": "010-1234-567",
+  "openTime": "09:00",
+  "closeTime": "21:00",
+  "reservationTimeUnit": 90,
+  "managerId": 1,
+  "street": "서울특별시 강남구 테헤란로",
+  "city": "서울",
+  "postalCode": "12345"
+}
