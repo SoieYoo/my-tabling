@@ -1,5 +1,6 @@
 package com.zerobase.mytabling.customer.domain;
 
+import com.zerobase.mytabling.customer.dto.ReviewDto;
 import com.zerobase.mytabling.store.domain.Reservation;
 import com.zerobase.mytabling.store.domain.Store;
 import jakarta.persistence.CascadeType;
@@ -56,4 +57,16 @@ public class Review {
 
   @LastModifiedDate
   private LocalDateTime modifiedAt;
+
+  public static Review createReview(ReviewDto.Request request, Store store, Customer customer,
+      Reservation reservation) {
+    return Review.builder()
+        .store(store)
+        .customer(customer)
+        .reservation(reservation)
+        .comment(request.getComment())
+        .rating(request.getRating())
+        .createdAt(LocalDateTime.now())
+        .build();
+  }
 }
