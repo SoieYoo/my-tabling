@@ -1,12 +1,15 @@
 package com.zerobase.mytabling.store.controller;
 
+import com.zerobase.mytabling.store.domain.Store;
 import com.zerobase.mytabling.store.dto.StoreDto;
 import com.zerobase.mytabling.store.service.StoreService;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,4 +31,21 @@ public class StoreController {
         .body("Store registered successfully , id = " + savedId);
   }
 
+  /**
+   * 매장 목록 조회 - 오름차순
+   */
+  @GetMapping("/stores/asc")
+  public ResponseEntity<List<Store>> getStoresAsc() {
+    List<Store> stores = storeService.getStoresSortedByRating(true);
+    return ResponseEntity.ok(stores);
+  }
+
+  /**
+   * 매장 목록 조회 - 내림차순
+   */
+  @GetMapping("/stores/desc")
+  public ResponseEntity<List<Store>> getStoresDesc() {
+    List<Store> stores = storeService.getStoresSortedByRating(false);
+    return ResponseEntity.ok(stores);
+  }
 }

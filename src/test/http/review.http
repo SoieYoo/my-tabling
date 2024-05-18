@@ -1,0 +1,11 @@
+### 리뷰 등록
+POST http://localhost:8080/review
+Content-Type: application/json
+
+{
+  "storeId": 3,
+  "customerId": 1,
+  "reservationId": 12,
+  "rating": 5.0,
+  "comment": "만족스러운 식사였습니다. 만족스러운 식사였습니다. 만족스러운 식사였습니다. 만족스러운 식사였습니다. 만족스러운 식사였습니다. 만족스러운 식사였습니다. 만족스러운 식사였습니다. "
+}
