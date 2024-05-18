@@ -2,8 +2,8 @@ package com.zerobase.mytabling.store.domain;
 
 import com.zerobase.mytabling.customer.domain.Customer;
 import com.zerobase.mytabling.customer.domain.Review;
+import com.zerobase.mytabling.store.dto.ReservationDto;
 import com.zerobase.mytabling.store.type.ReservationStatus;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -48,7 +48,7 @@ public class Reservation {
   @JoinColumn(name = "store_id", nullable = false)
   private Store store;
 
-  @Column(name = "reservation_time", nullable = false)
+  @Column(nullable = false)
   private LocalDateTime reservationDateTime;
 
   @Enumerated(EnumType.STRING)
@@ -58,4 +58,13 @@ public class Reservation {
   private int bookingPeopleCount;
   private LocalDateTime visitConfirmAt;
 
+  public static Reservation createReservation(ReservationDto.Request request, Customer customer, Store store) {
+    return Reservation.builder()
+        .customer(customer)
+        .store(store)
+        .reservationDateTime(request.getReservationDateTime())
+        .reservationStatus(ReservationStatus.REQUESTED)
+        .bookingPeopleCount(request.getBookingPeopleCount())
+        .build();
+  }
 }
