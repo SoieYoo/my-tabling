@@ -9,8 +9,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,5 +50,35 @@ public class StoreController {
   public ResponseEntity<List<Store>> getStoresDesc() {
     List<Store> stores = storeService.getStoresSortedByRating(false);
     return ResponseEntity.ok(stores);
+  }
+
+  /**
+   * 매장 조회
+   */
+  @GetMapping("/{storeId}")
+  public StoreDto.Response getStoreByStoreId(@PathVariable Long storeId) {
+    return storeService.getStoreById(storeId);
+  }
+  /**
+   * 매장 수정
+   */
+  @PutMapping("/{storeId}")
+  public ResponseEntity<String> updateStore(@PathVariable Long storeId, @RequestBody StoreDto.Request storeRequest) {
+
+      storeService.updateStore(storeId,
+          storeRequest.getStoreName(),
+          storeRequest.getStoreTelNumber(),
+          storeRequest.getManagerId());
+
+      return ResponseEntity.status(HttpStatus.OK).body("Store updated successfully");
+  }
+
+  /**
+   * 매장 삭제
+   */
+  @DeleteMapping("/{storeId}")
+  public ResponseEntity<String> deleteStore(@PathVariable Long storeId) {
+      storeService.deleteStore(storeId);
+      return ResponseEntity.status(HttpStatus.OK).body("Store deleted successfully");
   }
 }

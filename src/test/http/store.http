@@ -17,3 +17,31 @@ Content-Type: application/json
 ### 매장 조회
 GET http://localhost:8080/stores/desc
 Accept: application/json
+
+### 매장 수정
+PUT http://localhost:8080/manager/store/1
+Content-Type: application/json
+
+{
+  "storeName": "한식 36.5",
+  "storeTelNumber": "010-654-3210",
+  "openTime": "09:00",
+  "closeTime": "21:00",
+  "reservationTimeUnit": 90,
+  "managerId": 1,
+  "street": "신논현",
+  "city": "서울",
+  "postalCode": "07890"
+}
+
+### 매장 삭제
+DELETE http://localhost:8080/store/1
+Content-Type: application/json
+
+### 매장 검색
+GET http://localhost:8080/stores?searchTerm=브런치
+Accept: application/json
+
+### 매장 상세
+GET http://localhost:8080/store/2
+Accept: application/json

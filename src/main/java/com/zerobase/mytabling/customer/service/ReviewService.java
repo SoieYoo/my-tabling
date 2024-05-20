@@ -11,11 +11,11 @@ import com.zerobase.mytabling.store.domain.Store;
 import com.zerobase.mytabling.store.repository.ReservationRepository;
 import com.zerobase.mytabling.store.repository.StoreRepository;
 import jakarta.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -114,5 +114,35 @@ public class ReviewService {
     return averageRating;
   }
    */
+
+  /**
+   * 리뷰 수정
+   */
+  public Review updateReview(Long reviewId, Review updatedReview) {
+    Review existingReview = reviewRepository.findById(reviewId)
+        .orElseThrow(() -> new EntityNotFoundException("Review not found with ID: " + reviewId));
+
+    existingReview.setComment(updatedReview.getComment());
+    existingReview.setRating(updatedReview.getRating());
+    existingReview.setModifiedAt(LocalDateTime.now());
+
+    return reviewRepository.save(existingReview);
+  }
+
+  /**
+   * 리뷰 삭제
+   */
+  public void deleteReview(Long reviewId) {
+    reviewRepository.deleteById(reviewId);
+  }
+
+  /**
+   * 리뷰 조회
+   */
+  public ReviewDto.Response getReviewById(Long reviewId) {
+    Review review = reviewRepository.findById(reviewId)
+        .orElseThrow(() -> new EntityNotFoundException("Review not found with id: " + reviewId));
+    return ReviewDto.convertToDTO(review);
+  }
 
 }

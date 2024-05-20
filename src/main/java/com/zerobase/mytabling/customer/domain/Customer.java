@@ -1,5 +1,6 @@
 package com.zerobase.mytabling.customer.domain;
 
+import com.zerobase.mytabling.customer.dto.CustomerDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,4 +32,15 @@ public class Customer {
   private String password;
 
   private @CreatedDate LocalDateTime createdAt;
+
+  public static Customer createCustomer(CustomerDto.Request request, String hashedPassword) {
+    return Customer.builder()
+        .email(request.getEmail())
+        .name(request.getName())
+        .phoneNumber(request.getPhoneNumber())
+        .password(hashedPassword)
+        .createdAt(LocalDateTime.now())
+        .build();
+  }
+
 }
