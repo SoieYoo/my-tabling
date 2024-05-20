@@ -12,3 +12,15 @@ Content-Type: application/json
 ### 예약 조회
 GET http://localhost:8080/reservation/available-times?store_id=1&date=2024-06-08&duration=90
 Accept: application/json
+
+### 예약 취소
+PATCH http://localhost:8080/reservation/1/cancel
+Content-Type: application/json
+
+### 예약 승인
+PATCH http://localhost:8080/reservation/2/approve
+Content-Type: application/json
+
+### 예약 거절
+PATCH http://localhost:8080/reservation/3/reject
+Content-Type: application/json

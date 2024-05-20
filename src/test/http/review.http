@@ -9,3 +9,20 @@ Content-Type: application/json
   "rating": 5.0,
   "comment": "만족스러운 식사였습니다. 만족스러운 식사였습니다. 만족스러운 식사였습니다. 만족스러운 식사였습니다. 만족스러운 식사였습니다. 만족스러운 식사였습니다. 만족스러운 식사였습니다. "
 }
+
+### 리뷰 조회
+GET http://localhost:8080/review/2
+Content-Type: application/json
+
+### 리뷰 수정
+PUT http://localhost:8080/review/2
+Content-Type: application/json
+
+{
+  "rating": 4.9,
+  "comment": "친절한 직원분들 덕분에 정말 맛있게 식사했습니다."
+}
+
+### 리뷰 삭제
+DELETE http://localhost:8080/review/1
+Content-Type: application/json

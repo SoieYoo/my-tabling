@@ -1,0 +1,33 @@
+### 회원가입
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{
+  "email" : "111@gmail.com",
+  "name" : "유소이1",
+  "phoneNumber" : "010-1111-5678",
+  "password" : "password"
+
+}
+
+### 회원가입
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{
+  "email" : "222@gmail.com",
+  "name" : "유소이2",
+  "phoneNumber" : "010-2222-5678",
+  "password" : "password"
+
+}
+
+### 로그인
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email" : "111@gmail.com",
+  "password" : "password"
+
+}

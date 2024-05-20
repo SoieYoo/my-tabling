@@ -1,12 +1,20 @@
 package com.zerobase.mytabling.store.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.zerobase.mytabling.customer.domain.Review;
+import com.zerobase.mytabling.manager.domain.Manager;
 import com.zerobase.mytabling.store.dto.StoreDto;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,9 +46,9 @@ public class Store {
   private String city;
   private String postalCode;
 
-//  @ManyToOne(fetch = FetchType.LAZY)
-//  @JoinColumn(name = "manager_id")
-//  private Manager manager;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "manager_id")
+  private Manager manager;
 
 
   private @CreatedDate LocalDateTime createdAt;

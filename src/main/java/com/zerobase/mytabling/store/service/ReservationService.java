@@ -1,12 +1,16 @@
 package com.zerobase.mytabling.store.service;
 
+import static com.zerobase.mytabling.type.ErrorCode.RESERVATION_NOT_FOUND;
+
 import com.zerobase.mytabling.customer.domain.Customer;
 import com.zerobase.mytabling.customer.repository.CustomerRepository;
+import com.zerobase.mytabling.exception.MyTablingException;
 import com.zerobase.mytabling.store.domain.Reservation;
 import com.zerobase.mytabling.store.domain.Store;
 import com.zerobase.mytabling.store.dto.ReservationDto;
 import com.zerobase.mytabling.store.repository.ReservationRepository;
 import com.zerobase.mytabling.store.repository.StoreRepository;
+import com.zerobase.mytabling.store.type.ReservationStatus;
 import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,6 +20,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -94,4 +99,82 @@ public class ReservationService {
     return availableTimes;
   }
 
+  /**
+   * 고객의 예약 취소
+   */
+  @Transactional
+  public void cancelReservation(Long reservationId) {
+    Reservation reservation = reservationRepository.findById(reservationId)
+        .orElseThrow(() -> new MyTablingException(RESERVATION_NOT_FOUND));
+
+    // 승인된 예약건은 취소 불가
+    if (reservation.getReservationStatus() == ReservationStatus.APPROVED) {
+      throw new IllegalStateException("Cannot cancel a approved reservation");
+    }
+
+    reservation.setReservationStatus(ReservationStatus.CANCELLED);
+
+    reservationRepository.save(reservation);
+  }
+
+  /**
+   * 예약 승인
+   */
+  public void approveReservation(Long reservationId) {
+    // 존재하는 예약인지
+    Reservation reservation = getReservation(reservationId);
+
+    // 취소건이 아닌지
+    isCancelled(reservation);
+
+    // 예약 상태 승인
+    reservation.setReservationStatus(ReservationStatus.APPROVED);
+
+    reservationRepository.save(reservation);
+
+  }
+
+  private Reservation getReservation(Long reservationId) {    // 존재하는 예약인지
+    return reservationRepository.findById(reservationId)
+        .orElseThrow(() -> new IllegalArgumentException(
+            "Reservation with ID " + reservationId + " not found"));
+  }
+
+  private static void isCancelled(Reservation reservation) {    // 취소건인지
+    if (reservation.getReservationStatus() == ReservationStatus.CANCELLED) {
+      throw new IllegalStateException("Cannot approve a cancelled reservation");
+    }
+  }
+
+  /**
+   * 예약 거절
+   */
+  public void rejectReservation(Long reservationId) {
+    // 존재하는 예약인지
+    Reservation reservation = getReservation(reservationId);
+
+    // 취소건이 아닌지
+    isCancelled(reservation);
+
+    reservation.setReservationStatus(ReservationStatus.REJECTED);
+
+    reservationRepository.save(reservation);
+
+  }
+
+  /**
+   * 예약 방문 확인
+   */
+  public void completedReservation(Long reservationId) {
+    // 존재하는 예약인지
+    Reservation reservation = getReservation(reservationId);
+
+    // 취소건이 아닌지
+    isCancelled(reservation);
+
+    reservation.setReservationStatus(ReservationStatus.COMPLETED);
+
+    reservationRepository.save(reservation);
+
+  }
 }
