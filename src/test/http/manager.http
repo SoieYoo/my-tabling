@@ -1,0 +1,21 @@
+### 회원가입
+POST http://localhost:8080/manager/register
+Content-Type: application/json
+
+{
+  "email" : "usoi@gmail.com",
+  "name" : "유소이",
+  "phoneNumber" : "010-1234-5678",
+  "password" : "password"
+
+}
+
+### 로그인
+POST http://localhost:8080/manager/login
+Content-Type: application/json
+
+{
+  "email" : "usoi@gmail.com",
+  "password" : "password"
+
+}

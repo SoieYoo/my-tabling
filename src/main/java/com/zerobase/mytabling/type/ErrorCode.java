@@ -12,6 +12,7 @@ public enum ErrorCode {
   INVALID_INPUT("유효성 검증 실패입니다."),
   INVALID_REQUEST("잘못된 요청입니다."),
   RESERVATION_NOT_FOUND("예약을 찾을 수 없습니다."),
+  FILED_NOT_EMPTY("값을 입력해주세요."),
   INTERVAL_SERVER_ERROR("내부 서버 오류가 발생했습니다.");
   private final String description;
 }
